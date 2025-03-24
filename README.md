@@ -2,6 +2,10 @@
 
 A Python-based system that monitors sports odds across multiple bookmakers to identify arbitrage opportunities.
 
+## ⚠️ Security Notice
+
+This project uses environment variables for sensitive information. Never commit your `.env` file or expose your API keys. The `.env` file is already included in `.gitignore` to prevent accidental commits.
+
 ## Features
 
 - Monitors odds from multiple sports leagues
@@ -29,6 +33,7 @@ pip install -r requirements.txt
      ODDS_API_KEY=your_api_key_here
      ```
    - Get your API key from [The Odds API](https://the-odds-api.com/)
+   - ⚠️ Never commit your `.env` file or share your API key
 
 ## Usage
 
@@ -48,6 +53,13 @@ The script will:
 - Modify `MAIN_SPORTS` in `arbitrage.py` to add or remove sports leagues
 - Adjust `EXCLUDED_BOOKS` to filter out specific sportsbooks
 - Change the arbitrage threshold in `find_implied_probabilities()` if needed
+
+## Security Best Practices
+
+1. Never commit your `.env` file
+2. Keep your API keys secure and rotate them regularly
+3. Use environment variables for all sensitive information
+4. Check the `.gitignore` file to ensure sensitive files are excluded
 
 ## License
 
