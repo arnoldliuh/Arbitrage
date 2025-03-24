@@ -4,84 +4,74 @@ import time
 from datetime import datetime, timedelta
 
 # API Configuration
-API_KEY = "0be25729d5952f68e3656998f1811026"  # The Odds API key
+API_KEY = "1b688ed00b4b57a9b35b15d17426fc84"  # The Odds API key
 BASE_URL = "https://api.the-odds-api.com/v4"
 
-# Excluded sportsbooks (empty by default, add sportsbooks to exclude as needed)
+# Excluded sportsbooks
 EXCLUDED_BOOKS = []
 
 # Main sports to include
 MAIN_SPORTS = {
-    # Basketball
-    "basketball_wnba": "WNBA",  # Currently in season
-    "basketball_ncaab": "NCAAB",  # Currently in season
-    "basketball_wncaab": "WNCAAB",  # Currently in season
-    "basketball_nbl": "NBL (Australia)",  # Currently in season
+    # Basketball 
+    "basketball_ncaab": "NCAAB",  
+    "basketball_nbl": "NBL (Australia)",  
     
     # Boxing
     "boxing_boxing": "Boxing",
     
-    # Ice Hockey
-    "icehockey_nhl": "NHL",  # Currently in season
-    "icehockey_ahl": "AHL",  # Currently in season
-    "icehockey_liiga": "Finnish Liiga",  # Currently in season
-    "icehockey_mestis": "Finnish Mestis",  # Currently in season
-    "icehockey_sweden_hockey_league": "SHL",  # Currently in season
-    "icehockey_sweden_allsvenskan": "HockeyAllsvenskan",  # Currently in season
-    
-    # Lacrosse
-    "lacrosse_pll": "Premier Lacrosse League",  # Currently in season
-    "lacrosse_ncaa": "NCAA Lacrosse",  # Currently in season
+    # Ice Hockey 
+    "icehockey_ahl": "AHL",  
+    "icehockey_liiga": "Finnish Liiga",  
+    "icehockey_mestis": "Finnish Mestis",  
+    "icehockey_sweden_hockey_league": "SHL",  
+    "icehockey_sweden_allsvenskan": "HockeyAllsvenskan",  
     
     # MMA
     "mma_mixed_martial_arts": "MMA",  # Year-round
     
     # Rugby
-    "rugbyleague_nrl": "NRL",  # Currently in season
-    "rugbyunion_six_nations": "Six Nations",  # Currently in season
+    "rugbyleague_nrl": "NRL",  
     
     # Soccer (Currently Active Leagues)
-    "soccer_argentina_primera_division": "Argentina Primera",  # Currently in season
-    "soccer_australia_aleague": "A-League",  # Currently in season
-    "soccer_austria_bundesliga": "Austrian Bundesliga",  # Currently in season
-    "soccer_belgium_first_div": "Belgium First Division",  # Currently in season
-    "soccer_brazil_campeonato": "Brazil Serie A",  # Currently in season
-    "soccer_brazil_serie_b": "Brazil Serie B",  # Currently in season
-    "soccer_chile_campeonato": "Chile Primera",  # Currently in season
-    "soccer_china_superleague": "China Super League",  # Currently in season
-    "soccer_denmark_superliga": "Denmark Superliga",  # Currently in season
-    "soccer_england_efl_cup": "EFL Cup",  # Currently in season
-    "soccer_england_league1": "League 1",  # Currently in season
-    "soccer_england_league2": "League 2",  # Currently in season
-    "soccer_epl": "EPL",  # Currently in season
-    "soccer_fa_cup": "FA Cup",  # Currently in season
-    "soccer_finland_veikkausliiga": "Veikkausliiga",  # Currently in season
-    "soccer_france_ligue_one": "Ligue 1",  # Currently in season
-    "soccer_france_ligue_two": "Ligue 2",  # Currently in season
-    "soccer_germany_bundesliga": "Bundesliga",  # Currently in season
-    "soccer_germany_bundesliga2": "Bundesliga 2",  # Currently in season
-    "soccer_germany_liga3": "3. Liga",  # Currently in season
-    "soccer_greece_super_league": "Greek Super League",  # Currently in season
-    "soccer_italy_serie_a": "Serie A",  # Currently in season
-    "soccer_italy_serie_b": "Serie B",  # Currently in season
-    "soccer_japan_j_league": "J League",  # Currently in season
-    "soccer_korea_kleague1": "K League 1",  # Currently in season
-    "soccer_league_of_ireland": "League of Ireland",  # Currently in season
-    "soccer_mexico_ligamx": "Liga MX",  # Currently in season
-    "soccer_netherlands_eredivisie": "Eredivisie",  # Currently in season
-    "soccer_norway_eliteserien": "Eliteserien",  # Currently in season
-    "soccer_poland_ekstraklasa": "Ekstraklasa",  # Currently in season
-    "soccer_portugal_primeira_liga": "Primeira Liga",  # Currently in season
-    "soccer_spain_la_liga": "La Liga",  # Currently in season
-    "soccer_spain_segunda_division": "La Liga 2",  # Currently in season
-    "soccer_spl": "Scottish Premiership",  # Currently in season
-    "soccer_sweden_allsvenskan": "Allsvenskan",  # Currently in season
-    "soccer_sweden_superettan": "Superettan",  # Currently in season
-    "soccer_switzerland_superleague": "Swiss Super League",  # Currently in season
-    "soccer_turkey_super_league": "Turkish Super League",  # Currently in season
+    "soccer_argentina_primera_division": "Argentina Primera",  
+    "soccer_australia_aleague": "A-League",  
+    "soccer_austria_bundesliga": "Austrian Bundesliga",  
+    "soccer_belgium_first_div": "Belgium First Division",  
+    "soccer_brazil_campeonato": "Brazil Serie A",  
+    "soccer_brazil_serie_b": "Brazil Serie B",  
+    "soccer_chile_campeonato": "Chile Primera",  
+    "soccer_china_superleague": "China Super League",  
+    "soccer_denmark_superliga": "Denmark Superliga",  
+    "soccer_england_efl_cup": "EFL Cup",  
+    "soccer_england_league1": "League 1",  
+    "soccer_england_league2": "League 2",   
+    "soccer_finland_veikkausliiga": "Veikkausliiga",  
+    "soccer_france_ligue_one": "Ligue 1",  
+    "soccer_france_ligue_two": "Ligue 2",  
+    "soccer_germany_bundesliga": "Bundesliga",  
+    "soccer_germany_bundesliga2": "Bundesliga 2",  
+    "soccer_germany_liga3": "3. Liga",  
+    "soccer_greece_super_league": "Greek Super League",  
+    "soccer_italy_serie_a": "Serie A",  
+    "soccer_italy_serie_b": "Serie B",  
+    "soccer_japan_j_league": "J League",  
+    "soccer_korea_kleague1": "K League 1",  
+    "soccer_league_of_ireland": "League of Ireland",  
+    "soccer_mexico_ligamx": "Liga MX",  
+    "soccer_netherlands_eredivisie": "Eredivisie",  
+    "soccer_norway_eliteserien": "Eliteserien",  
+    "soccer_poland_ekstraklasa": "Ekstraklasa",  
+    "soccer_portugal_primeira_liga": "Primeira Liga",  
+    "soccer_spain_la_liga": "La Liga",  
+    "soccer_spain_segunda_division": "La Liga 2",  
+    "soccer_spl": "Scottish Premiership",  
+    "soccer_sweden_allsvenskan": "Allsvenskan",  
+    "soccer_sweden_superettan": "Superettan",  
+    "soccer_switzerland_superleague": "Swiss Super League",  
+    "soccer_turkey_super_league": "Turkish Super League",  
     
     # Australian Rules
-    "aussierules_afl": "AFL"  # Currently in season
+    "aussierules_afl": "AFL"  
 }
 
 # Markets to include
@@ -113,10 +103,10 @@ def fetch_odds(sport_key):
     url = f"{BASE_URL}/sports/{sport_key}/odds/?apiKey={API_KEY}&regions=us&markets={markets_param}"
     response = requests.get(url)
     if response.status_code == 200:
-        return response.json(), response.headers
+        return response.json()
     else:
         print(f"Failed to fetch odds for {sport_key}: {response.status_code}")
-        return None, None
+        return None
 
 # Store odds in database
 def store_odds(sport_key, odds_data):
@@ -207,7 +197,7 @@ def main():
     for sport_key in MAIN_SPORTS:
         sport_name = MAIN_SPORTS[sport_key]
         print(f"\nFetching odds for {sport_name}...")
-        odds_data, headers = fetch_odds(sport_key)
+        odds_data = fetch_odds(sport_key)
         if odds_data:
             store_odds(sport_key, odds_data)
 
