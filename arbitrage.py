@@ -2,10 +2,18 @@ import sqlite3
 import requests
 import time
 from datetime import datetime, timedelta
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # API Configuration
-API_KEY = "1b688ed00b4b57a9b35b15d17426fc84"  # The Odds API key
+API_KEY = os.getenv('ODDS_API_KEY')  # Get API key from environment variable
 BASE_URL = "https://api.the-odds-api.com/v4"
+
+if not API_KEY:
+    raise ValueError("Please set the ODDS_API_KEY environment variable")
 
 # Excluded sportsbooks
 EXCLUDED_BOOKS = []
